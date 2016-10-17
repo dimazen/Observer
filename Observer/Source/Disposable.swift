@@ -1,10 +1,9 @@
-
 import Foundation
 
 public final class Disposable {
 	
 	var _disposed: Bool = false
-	public private(set) var disposed: Bool {
+	public fileprivate(set) var disposed: Bool {
 		get {
 			let value: Bool
 			OSSpinLockLock(&lock)
@@ -19,25 +18,25 @@ public final class Disposable {
 		}
 	}
 	
-	private let action: Void -> Void
-	private var lock: OSSpinLock = OS_SPINLOCK_INIT
+	fileprivate let action: (Void) -> Void
+	fileprivate var lock: OSSpinLock = OS_SPINLOCK_INIT
 		
-	public init(action: Void -> Void) {
+	public init(action: @escaping (Void) -> Void) {
 		self.action = action
 	}
 	
-	public init(disposable: Disposable, action: Void -> Void) {
+	public init(disposable: Disposable, action: @escaping (Void) -> Void) {
 		self.action = {
 			disposable.dispose()
 			action()
 		}
 	}
 	
-
 	public func dispose() {
 		if !disposed {
 			disposed = true
 			action()
 		}
 	}
+    
 }

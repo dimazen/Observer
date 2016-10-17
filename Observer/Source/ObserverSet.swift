@@ -1,31 +1,30 @@
-
 import Foundation
 
 final class ObserverInfo<T>: Hashable {
 	
-	private let observer: T -> Void
+	fileprivate let observer: (T) -> Void
 	
-	private init(_ observer: T -> Void) {
+	fileprivate init(_ observer: @escaping (T) -> Void) {
 		self.observer = observer
 	}
 	
-	var hashValue: Int { return unsafeAddressOf(self).hashValue }
+	var hashValue: Int { return Unmanaged.passUnretained(self).toOpaque().hashValue }
 }
 
 func == <T>(lhs: ObserverInfo<T>, rhs: ObserverInfo<T>) -> Bool {
 	return lhs.hashValue == rhs.hashValue
 }
 
-public class ObserverSet<T> {
+open class ObserverSet<T> {
 	
-	private var lock: OSSpinLock = OS_SPINLOCK_INIT
-	private var descriptors: Set<ObserverInfo<T>> = []
+	fileprivate var lock: OSSpinLock = OS_SPINLOCK_INIT
+	fileprivate var descriptors: Set<ObserverInfo<T>> = []
 	
-	public var notificationQueue: dispatch_queue_t?
+	open var notificationQueue: DispatchQueue?
 	
 	public init() {}
 	
-	public func add(observer: T -> Void) -> Disposable {
+	open func add(_ observer: @escaping (T) -> Void) -> Disposable {
 		let descriptor = ObserverInfo(observer)
 		
 		OSSpinLockLock(&lock)
@@ -33,7 +32,7 @@ public class ObserverSet<T> {
 		OSSpinLockUnlock(&lock)
 		
 		let disposable = Disposable { [weak self, weak descriptor] in
-			if let _self = self, descriptor = descriptor {
+			if let _self = self, let descriptor = descriptor {
 				OSSpinLockLock(&_self.lock)
 				_self.descriptors.remove(descriptor)
 				OSSpinLockUnlock(&_self.lock)
@@ -43,13 +42,13 @@ public class ObserverSet<T> {
 		return disposable
 	}
 	
-	public func send(value: T) {
+	open func send(_ value: T) {
 		OSSpinLockLock(&lock)
 		let usedDescriptors = descriptors
 		OSSpinLockUnlock(&lock)
 		
 		if let queue = notificationQueue {
-			dispatch_async(queue) {
+			queue.async {
 				for descriptor in usedDescriptors {
 					descriptor.observer(value)
 				}
@@ -61,9 +60,10 @@ public class ObserverSet<T> {
 		}
 	}
 	
-	public func disposeAll() {
+	open func disposeAll() {
 		OSSpinLockLock(&lock)
 		descriptors.removeAll()
 		OSSpinLockUnlock(&lock)
 	}
+    
 }

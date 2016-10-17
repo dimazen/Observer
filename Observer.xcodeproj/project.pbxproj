@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BA10B0E1DAD14AB00C52824 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA10B0C1DAD14AB00C52824 /* Disposable.swift */; };
+		7BA10B0F1DAD14AB00C52824 /* ObserverSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA10B0D1DAD14AB00C52824 /* ObserverSet.swift */; };
 		AD5A8C951C29D3E1008FABCF /* Observer.h in Headers */ = {isa = PBXBuildFile; fileRef = AD5A8C941C29D3E1008FABCF /* Observer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD5A8C9F1C29D450008FABCF /* ObserverSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A8C9D1C29D450008FABCF /* ObserverSet.swift */; };
-		AD5A8CA11C29D5B3008FABCF /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5A8CA01C29D5B3008FABCF /* Disposable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7BA10B0C1DAD14AB00C52824 /* Disposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		7BA10B0D1DAD14AB00C52824 /* ObserverSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObserverSet.swift; sourceTree = "<group>"; };
 		AD5A8C911C29D3E1008FABCF /* Observer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Observer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5A8C941C29D3E1008FABCF /* Observer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
 		AD5A8C961C29D3E1008FABCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD5A8C9D1C29D450008FABCF /* ObserverSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObserverSet.swift; sourceTree = "<group>"; };
-		AD5A8CA01C29D5B3008FABCF /* Disposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +31,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7BA10B0B1DAD14AB00C52824 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				7BA10B0C1DAD14AB00C52824 /* Disposable.swift */,
+				7BA10B0D1DAD14AB00C52824 /* ObserverSet.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		AD5A8C871C29D3E1008FABCF = {
 			isa = PBXGroup;
 			children = (
@@ -50,8 +59,7 @@
 		AD5A8C931C29D3E1008FABCF /* Observer */ = {
 			isa = PBXGroup;
 			children = (
-				AD5A8C9D1C29D450008FABCF /* ObserverSet.swift */,
-				AD5A8CA01C29D5B3008FABCF /* Disposable.swift */,
+				7BA10B0B1DAD14AB00C52824 /* Source */,
 				AD5A8C941C29D3E1008FABCF /* Observer.h */,
 				AD5A8C961C29D3E1008FABCF /* Info.plist */,
 			);
@@ -101,6 +109,7 @@
 				TargetAttributes = {
 					AD5A8C901C29D3E1008FABCF = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -136,8 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD5A8CA11C29D5B3008FABCF /* Disposable.swift in Sources */,
-				AD5A8C9F1C29D450008FABCF /* ObserverSet.swift in Sources */,
+				7BA10B0F1DAD14AB00C52824 /* ObserverSet.swift in Sources */,
+				7BA10B0E1DAD14AB00C52824 /* Disposable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +258,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -267,6 +277,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zen.Observer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
